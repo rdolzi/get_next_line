@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/12 21:15:35 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/12 21:36:52 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*ft_read(int fd, char *stack)
 		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
 			return (NULL);
-
 		len = read(fd, buffer, BUFFER_SIZE);
 		buffer[len + 1] = '\0';
 		stack = ft_strjoin(stack, buffer);
