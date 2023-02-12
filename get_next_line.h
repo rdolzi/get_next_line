@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdolzi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:27:09 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/10 11:28:32 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/12 18:05:38 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 
 char	*get_next_line(int fd);
-char	*ft_strdup(char *str);
+char	*ft_strjoin(char *s1, char *s2);
+int     ft_strchr(char *s1, char c);
 
 #endif
