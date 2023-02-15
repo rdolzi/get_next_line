@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/12 21:36:52 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/14 18:02:20 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*stack;
 
-	stack = "";
+	stack = malloc(1);
+	if (!stack)
+		return (NULL);
+	stack[0] = '\0';
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	stack = ft_read(fd, stack);
@@ -88,6 +91,16 @@ char	*get_next_line(int fd)
 int main()
 {
 	int fd = open("test.txt", O_RDONLY);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
+	char *str = get_next_line(fd);
+	printf("%s", str);
+	free(str);
+	str = get_next_line(fd);
+	printf("%s",str);
+	free(str);
+		str = get_next_line(fd);
+	printf("%s",str);
+	free(str);
+		str = get_next_line(fd);
+	printf("%s",str);
+	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:40:04 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/12 21:36:50 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:25:20 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (j < s2len)
 		str[i++] = s2[j++];
 	str[i] = '\0';
+	free(s1);
+	//free(s2);
 	return (str);
 }
