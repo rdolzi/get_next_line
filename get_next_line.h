@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:27:09 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/12 20:31:57 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/16 16:42:24 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char *s1, char c);
-
+size_t	ft_strlen(char *str);
+char	*ft_strdup(char *s1);
 #endif
