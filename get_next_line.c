@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/18 04:28:47 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/18 05:28:08 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ char	*ft_read(int fd, char *stack)
 	while (!ft_strchr(stack, '\n') && len != 0)
 	{
 		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	//	write(1,"+",1);
 		if (!buffer)
 			return (NULL);
 		len = read(fd, buffer, BUFFER_SIZE);
+	//	write(1,"-",1);
 		if (len < 0 )
 		{
-			write(1,"AAAAA",5);
+	//		write(1,"AAAAA",5);
 			free(stack);
 			free(buffer);
 			return (NULL);
@@ -40,6 +42,7 @@ char	*ft_read(int fd, char *stack)
 		buffer[len] = '\0';
 //		printf("Buffer: %s |len:%d\n ", buffer, len);
 		stack = ft_strjoin(stack, buffer);
+	//	write(1,"#",1);
 		//free(buffer);
 	}
 	return (stack);
@@ -53,7 +56,11 @@ char	*extract_line(char *stack)
 	size_t	i;
 	char	*line;
 	size_t  j;
-	printf(">>>>>>>%p",stack);	
+	if (!stack[0])
+	{
+		free(stack);
+		return(NULL);
+	}
 	i = 0;
 	while (stack[i] != '\n' && stack[i])
 		i++;
@@ -76,11 +83,13 @@ char	*extract_line(char *stack)
 		i++;
 	}
 	line[i] = '\0';
+
+	i = 0;
 	if (!line[0])
 	{
-		write(1,"BBBBB",5);
+	//	write(1,"BBBBB",5);
 		free(stack);
-		write(1,"CCCCC",5);
+	//	write(1,"CCCCC",5);
 		free(line);
 		return (NULL);
 	}
@@ -135,19 +144,25 @@ char	*get_next_line(int fd)
 	static char	*stack;
 	if (!stack)	
 		stack = ft_strdup("");
-	//if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
-	//	return (NULL);
+//	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+//		return (NULL);
 	stack = ft_read(fd, stack);
 	if (!stack)
+	{
+	//	write(1,"8",1);
 		return (NULL);
+	}
 	line = extract_line(stack);
 	if (!line)
+	{
+	//	write(1,"9",1);
 		return (NULL);
+	}
 	stack = ft_clean(stack);
 	return (line);
 }
 
-
+/*
 int main()
 {
 	int fd = open("test.txt", O_RDONLY);
@@ -169,4 +184,4 @@ int main()
 	printf(">line:%s\n",str);
 	free(str);
 	
-}
+}*/
