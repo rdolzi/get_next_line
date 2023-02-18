@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:40:04 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/16 16:18:07 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/18 03:37:48 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	j;
 	char	*str;
 
+	if (!s1 && !s2)
+		return (NULL);
 	i = 0;
 	j = 0;
 	s1len = ft_strlen(s1);
@@ -53,16 +55,21 @@ char	*ft_strjoin(char *s1, char *s2)
 	str = (char *)malloc (s1len + s2len + 1);
 	if (!str)
 		return (NULL);
-	while (i < s1len)
+	while (s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
 	while (j < s2len)
-		str[i++] = s2[j++];
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
 	str[i] = '\0';
+//	printf("\ns1:%s ||s2:%s ||str:%s \n",s1,s2,str);
 	free(s1);
-  //	free(s2);
+  	free(s2);
 	return (str);
 }
 
