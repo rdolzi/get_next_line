@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:27:09 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 15:11:57 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:56:53 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char *s1, char c);
 size_t	ft_strlen(char *str);
 void	*ft_free(char *s1, char *s2);
+size_t	ft_is_newline(char c);
+
 #endif

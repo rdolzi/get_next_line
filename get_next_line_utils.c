@@ -6,11 +6,18 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:40:04 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 15:11:05 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:56:47 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_is_newline(char c)
+{
+	if (c == '\n')
+		return (1);
+	return (0);
+}
 
 void	*ft_free(char *s1, char *s2)
 {
