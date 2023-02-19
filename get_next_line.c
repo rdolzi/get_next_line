@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 14:37:08 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:17:46 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,8 @@ char	*ft_read(int fd, char *stack)
 		if (!buffer)
 			return (NULL);
 		len = read(fd, buffer, BUFFER_SIZE);
-		if (len < 0 )
-		{
-			free(stack);
-			free(buffer);
-			return (NULL);
-		}
+		if (len < 0)
+			return (ft_free(stack, buffer));
 		buffer[len] = '\0';
 		stack = ft_strjoin(stack, buffer);
 	}
@@ -51,10 +47,7 @@ char	*extract_line(char *stack)
 	size_t	j;
 
 	if (!stack[0])
-	{
-		free(stack);
-		return (NULL);
-	}
+		return (ft_free(stack, NULL));
 	i = 0;
 	while (stack[i] != '\n' && stack[i])
 		i++;
@@ -72,18 +65,10 @@ char	*extract_line(char *stack)
 		i++;
 	}
 	if (j == 2)
-	{	
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
 	line[i] = '\0';
-	i = 0;
 	if (!line[0])
-	{
-		free(stack);
-		free(line);
-		return (NULL);
-	}
+		return (ft_free(stack, line));
 	return (line);
 }
 
@@ -132,7 +117,12 @@ char	*get_next_line(int fd)
 	static char	*stack;
 
 	if (!stack)
-		stack = ft_strdup("");
+	{
+		stack = malloc(1);
+		if (!stack)
+			return (NULL);
+		stack[0] = '\0';
+	}
 	stack = ft_read(fd, stack);
 	if (!stack)
 		return (NULL);

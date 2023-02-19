@@ -6,11 +6,20 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:40:04 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 14:37:47 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:11:05 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*ft_free(char *s1, char *s2)
+{
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
+	return (NULL);
+}
 
 size_t	ft_strlen(char *str)
 {
@@ -61,33 +70,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	while (j < s2len)
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
+		str[i++] = s2[j++];
 	str[i] = '\0';
-	free(s1);
-	free(s2);
+	ft_free(s1, s2);
 	return (str);
-}
-
-char	*ft_strdup(char *s1)
-{
-	char	*s2;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = ft_strlen(s1);
-	s2 = (char *)malloc((len + 1) * sizeof(char));
-	if (!s2)
-		return (NULL);
-	while (i < len)
-	{
-		s2[i] = s1[i];
-		i++;
-	}
-	s2[i] = '\0';
-	return (s2);
 }
