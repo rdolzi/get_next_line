@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 19:44:27 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 20:13:49 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 //salvando il risultato in stack
 char	*ft_read(int fd, char *stack)
 {
-	char	*buffer;
-	int		len;
+	char			*buffer;
+	int				len;
+	static int		fd_empty;
 
 	len = 1;
 	while (!ft_strchr(stack, '\n') && len != 0)
@@ -28,8 +29,11 @@ char	*ft_read(int fd, char *stack)
 		len = read(fd, buffer, BUFFER_SIZE);
 		if (len < 0)
 			return (ft_free(stack, buffer));
+		if (!len && !fd_empty)
+			return (ft_free(stack, buffer));
 		buffer[len] = '\0';
 		stack = ft_strjoin(stack, buffer);
+		fd_empty++;
 	}
 	return (stack);
 }
