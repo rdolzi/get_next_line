@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 16:40:04 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/18 03:37:48 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 14:37:47 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	str[i] = '\0';
-//	printf("\ns1:%s ||s2:%s ||str:%s \n",s1,s2,str);
 	free(s1);
-  	free(s2);
+	free(s2);
 	return (str);
 }
 
@@ -92,4 +91,3 @@ char	*ft_strdup(char *s1)
 	s2[i] = '\0';
 	return (s2);
 }
-
