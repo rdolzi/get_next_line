@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 20:13:49 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:16:41 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,22 @@ char	*ft_read(int fd, char *stack)
 {
 	char			*buffer;
 	int				len;
-	static int		fd_empty;
 
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
 	len = 1;
 	while (!ft_strchr(stack, '\n') && len != 0)
 	{
-		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buffer)
-			return (NULL);
 		len = read(fd, buffer, BUFFER_SIZE);
 		if (len < 0)
 			return (ft_free(stack, buffer));
-		if (!len && !fd_empty)
+		if (!len && !stack)
 			return (ft_free(stack, buffer));
 		buffer[len] = '\0';
 		stack = ft_strjoin(stack, buffer);
-		fd_empty++;
 	}
+	ft_free(buffer, NULL);
 	return (stack);
 }
 
@@ -49,7 +48,7 @@ char	*extract_line(char *stack)
 	size_t	is_newline;
 	char	*line;
 
-	if (!stack[0])
+	if (stack && !stack[0])
 		return (ft_free(stack, NULL));
 	i = 0;
 	while (stack[i] != '\n' && stack[i])
@@ -104,13 +103,6 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*stack;
 
-	if (!stack)
-	{
-		stack = malloc(1);
-		if (!stack)
-			return (NULL);
-		stack[0] = '\0';
-	}
 	stack = ft_read(fd, stack);
 	if (!stack)
 		return (NULL);
