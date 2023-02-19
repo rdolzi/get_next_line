@@ -6,12 +6,12 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 15:17:46 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:34:27 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+//--> create init_str(size) per: malloc + \0
 // utilizza read per leggere il file e salva in backup (grandezza BUFFER_SIZE)
 //legge buffer volte fino a che non troviamo non raggiunge \n o EOF
 //salvando il risultato in stack
@@ -43,18 +43,17 @@ char	*ft_read(int fd, char *stack)
 char	*extract_line(char *stack)
 {
 	size_t	i;
-	char	*line;
 	size_t	j;
+	char	*line;
 
 	if (!stack[0])
 		return (ft_free(stack, NULL));
 	i = 0;
 	while (stack[i] != '\n' && stack[i])
 		i++;
+	j = 1;
 	if (stack[i] == '\n')
 		j = 2;
-	else
-		j = 1;
 	line = (char *)malloc(sizeof(char) * (i + j));
 	if (!line)
 		return (NULL);
@@ -84,10 +83,9 @@ char	*ft_clean(char *stack)
 	i = 0;
 	while (stack[i] != '\n' && stack[i])
 		i++;
+	barbatrucco = 1;
 	if (stack[i] == '\n')
 		barbatrucco = 0;
-	else
-		barbatrucco = 1;
 	j = (int)ft_strlen(stack);
 	clean_stack = (char *)malloc(sizeof(char) * (j - i + barbatrucco));
 	if (!clean_stack)
@@ -95,18 +93,10 @@ char	*ft_clean(char *stack)
 	k = 0;
 	j--;
 	while (j > i)
-	{
-		i++;
-		clean_stack[k] = stack[i];
-		k++;
-	}
+		clean_stack[k++] = stack[++i];
 	clean_stack[k] = '\0';
 	if (!clean_stack[0])
-	{
-		free(clean_stack);
-		free(stack);
-		return (NULL);
-	}
+		return (ft_free(clean_stack, stack));
 	free(stack);
 	return (clean_stack);
 }
