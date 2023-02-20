@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/19 21:25:35 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/20 14:32:11 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,37 +101,16 @@ char	*ft_clean(char *stack)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stack;
+	static char	*stack[1042];
 
-	stack = ft_read(fd, stack);
-	if (!stack)
+	if (fd < 0)
 		return (NULL);
-	line = extract_line(stack);
+	stack[fd] = ft_read(fd, stack[fd]);
+	if (!stack[fd])
+		return (NULL);
+	line = extract_line(stack[fd]);
 	if (!line)
 		return (NULL);
-	stack = ft_clean(stack);
+	stack[fd] = ft_clean(stack[fd]);
 	return (line);
 }
-
-/*
-int main()
-{
-	int fd = open("test.txt", O_RDONLY);
-	char *str = get_next_line(fd);
-	printf(">line:%s\n", str);
-	free(str);
-	
-	str = get_next_line(fd);
-	printf(">line:%s\n",str);
-	free(str);
-		str = get_next_line(fd);
-	printf("%s",str);
-	free(str);
-		str = get_next_line(fd);
-	printf(">line:%s\n",str);
-	free(str);
-	close(fd);
-		str = get_next_line(fd);
-	printf(">line:%s\n",str);
-	free(str);
-}*/
