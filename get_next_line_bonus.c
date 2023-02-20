@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/20 14:32:11 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/20 22:19:21 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 // utilizza read per leggere il file e salva in backup (grandezza BUFFER_SIZE)
 //legge buffer volte fino a che non troviamo non raggiunge \n o EOF
 //salvando il risultato in stack
@@ -101,7 +101,7 @@ char	*ft_clean(char *stack)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stack[1042];
+	static char	*stack[OPEN_MAX];
 
 	if (fd < 0)
 		return (NULL);
