@@ -6,7 +6,7 @@
 /*   By: rdolzi <rdolzi@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 12:12:48 by rdolzi            #+#    #+#             */
-/*   Updated: 2023/02/20 22:19:21 by rdolzi           ###   ########.fr       */
+/*   Updated: 2023/02/24 23:44:58 by rdolzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*ft_clean(char *stack)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stack[OPEN_MAX];
+	static char	*stack[1024];
 
 	if (fd < 0)
 		return (NULL);
